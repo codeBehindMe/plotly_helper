@@ -10,6 +10,7 @@ class LinePlot(Chart):
         pass
 
     def __call__(self, *args, **kwargs):
+        self._compile_scatter_object()
         return dict(data=self.data, layout=self.layout)
 
     def __init__(self, x, y, **kwargs):
