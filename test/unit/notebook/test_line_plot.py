@@ -1,5 +1,6 @@
 import numpy as np
 import pytest
+from plotly.graph_objs import Scatter
 
 from notebook.line_plot import LinePlot
 
@@ -38,4 +39,5 @@ class TestLinePlot:
         """
         plt = LinePlot(data['x'], data['y'])()
 
-        assert len(plt['data']) > 0
+        assert len(plt['data']) == 1
+        assert isinstance(plt['data'][0], Scatter)
