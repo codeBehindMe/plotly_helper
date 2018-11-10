@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from plotly.graph_objs import Scatter
 
-from notebook.line_plot import LinePlot
+from plotting.line_plot import LinePlot
 
 """
 Unit tests for the Lineplot class
