@@ -1,5 +1,7 @@
 import plotly.graph_objs as go
 
+from abstraction.constants import COLOUR_RGB_MAP
+from abstraction.constants import LINE_STYLE_MAP
 from abstraction.meta import Chart
 from abstraction.meta import XAxis
 from abstraction.meta import Yaxis
@@ -48,8 +50,13 @@ class LinePlot(Chart):
         :param value: Colour
         :return:
         """
-        # FIXME: Implement the colour system.
-        raise NotImplementedError()
+        try:
+            self.line['color'] = COLOUR_RGB_MAP[value.lower()]
+            return self
+        except KeyError:
+            raise KeyError(
+                "Invalid colour definition. Please select from {0}".format(
+                    COLOUR_RGB_MAP.keys()))
 
     def line_width(self, value):
         """
@@ -65,8 +72,12 @@ class LinePlot(Chart):
         :param value:
         :return:
         """
-        # FIXME: Implement the line style system.
-        raise NotImplementedError()
+        try:
+            self.line['dash'] = LINE_STYLE_MAP[value.lower()]
+            return self
+        except KeyError:
+            raise KeyError("Invalid line style definition. \
+                Please select from {0}".format(LINE_STYLE_MAP.keys()))
 
     @property
     def xaxis(self):
@@ -89,4 +100,5 @@ class LinePlot(Chart):
         Compiles a plotly scatter object and assigns it to the data list.
         :return:
         """
-        self.data.append(go.Scatter(x=self.x, y=self.y, name=self.name))
+        self.data.append(
+            go.Scatter(x=self.x, y=self.y, name=self.name, line=self.line))
