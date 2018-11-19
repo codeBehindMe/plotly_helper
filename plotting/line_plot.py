@@ -1,4 +1,7 @@
 import plotly.graph_objs as go
+from service.pathing import set_path
+
+set_path()
 
 from abstraction.constants import COLOUR_RGB_MAP
 from abstraction.constants import LINE_STYLE_MAP
