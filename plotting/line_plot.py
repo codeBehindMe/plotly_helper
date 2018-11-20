@@ -1,15 +1,10 @@
-import os
-import sys
-
 import plotly.graph_objs as go
 
-sys.path.append(os.path.abspath(os.path.join('..', __name__)))
-
-from abstraction.constants import COLOUR_RGB_MAP
-from abstraction.constants import LINE_STYLE_MAP
-from abstraction.meta import Chart
-from abstraction.meta import XAxis
-from abstraction.meta import Yaxis
+from ..abstraction.constants import COLOUR_RGB_MAP
+from ..abstraction.constants import LINE_STYLE_MAP
+from ..abstraction.meta import Chart
+from ..abstraction.meta import XAxis
+from ..abstraction.meta import Yaxis
 
 
 class LinePlot(Chart):
