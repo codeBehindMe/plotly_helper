@@ -43,6 +43,7 @@ class LinePlot(Chart):
         :return:
         """
         self.layout['title'] = value
+        return self
 
     def colour(self, value):
         """
