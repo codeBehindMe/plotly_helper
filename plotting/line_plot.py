@@ -9,7 +9,13 @@ from abstraction.meta import Yaxis
 
 class LinePlot(Chart):
     def __add__(self, other):
-        pass
+        """
+        Adds another plot to this chart. This isn't multiplot , this is just
+        adding two lines or overlaying plots together.
+        :param other: Other chart.
+        :return:
+        """
+        raise NotImplementedError()
 
     def __call__(self, *args, **kwargs):
         self._compile_scatter_object()
