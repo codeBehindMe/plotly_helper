@@ -29,12 +29,21 @@ class LinePlot(Chart):
         self.layout = {}
         self.data = []
         self.line = {}
+        self.line_name = None
 
-        self.name = kwargs.get("name", None)
+        # Assign properties if given.
+        self.name(kwargs.get("name", None))
+        self.title(kwargs.get("title", None))
+        self.colour(kwargs.get("colour", None))
 
-        self.dot = kwargs.get("linestyle", None)
-
-        self.title = kwargs.get("title", None)
+    def name(self, value):
+        """
+        Line name
+        :param value:
+        :return:
+        """
+        self.line_name = value
+        return self
 
     def title(self, value):
         """
@@ -43,6 +52,7 @@ class LinePlot(Chart):
         :return:
         """
         self.layout['title'] = value
+        return self
 
     def colour(self, value):
         """
@@ -100,5 +110,5 @@ class LinePlot(Chart):
         Compiles a plotly scatter object and assigns it to the data list.
         :return:
         """
-        self.data.append(
-            go.Scatter(x=self.x, y=self.y, name=self.name, line=self.line))
+        self.data.append(go.Scatter(x=self.x, y=self.y, name=self.line_name,
+                                    line=self.line))

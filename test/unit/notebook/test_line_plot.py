@@ -61,6 +61,13 @@ class TestLinePlot:
         :return:
         """
 
-        plt = LinePlot(data['x'], data['y']).line_style('dot')()
+        LinePlot(data['x'], data['y']).line_style('dot')()
 
-        plot(plt)
+    def test_axis_title(self, data):
+        """
+        Checks that the title correctly returns self.
+        :param data:
+        :return:
+        """
+
+        plot(LinePlot(data['x'], data['y']).title(None)())
