@@ -3,7 +3,7 @@ import pytest
 from plotly.graph_objs import Scatter
 from plotly.offline import plot
 
-from plotting.line_plot import LinePlot
+from plotting.line_chart import LineChart
 
 """
 Unit tests for the Lineplot class
@@ -31,14 +31,14 @@ class TestLinePlot:
         """
 
         # Constructor should always take 2 arguments at minimum.
-        LinePlot(data['x'], data['y'])
+        LineChart(data['x'], data['y'])
 
     def test_default_plot(self, data):
         """
         Check's that default plot has all the necessary components returned.
         :return:
         """
-        plt = LinePlot(data['x'], data['y'])()
+        plt = LineChart(data['x'], data['y'])()
 
         assert len(plt['data']) == 1
         assert isinstance(plt['data'][0], Scatter)
@@ -50,7 +50,7 @@ class TestLinePlot:
         :return:
         """
 
-        plt = LinePlot(data['x'], data['y']).colour("maroon")()
+        plt = LineChart(data['x'], data['y']).colour("maroon")()
 
         plt  # FIXME: Complete this test.
 
@@ -61,7 +61,7 @@ class TestLinePlot:
         :return:
         """
 
-        LinePlot(data['x'], data['y']).line_style('dot')()
+        LineChart(data['x'], data['y']).line_style('dot')()
 
     def test_axis_title(self, data):
         """
@@ -69,7 +69,7 @@ class TestLinePlot:
         :param data:
         :return:
         """
-        LinePlot(data['x'], data['y']).title(None)()
+        LineChart(data['x'], data['y']).title(None)()
 
     def test_add_plots(self, data):
         """
@@ -77,9 +77,9 @@ class TestLinePlot:
         :param data:
         :return:
         """
-        p1 = LinePlot(data['x'], data['y']).line_style('dot').title('first').name('first')
-        p2 = LinePlot(data['x'],
-                      data['y'] + np.random.randint(1, 3)).line_style(
+        p1 = LineChart(data['x'], data['y']).line_style('dot').title('first').name('first')
+        p2 = LineChart(data['x'],
+                       data['y'] + np.random.randint(1, 3)).line_style(
             'dot').title('other').name('second')
 
         p3 = (p1 + p2).title("third")

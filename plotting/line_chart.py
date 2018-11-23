@@ -9,7 +9,7 @@ from abstraction.meta import XAxis
 from abstraction.meta import Yaxis
 
 
-class LinePlot(Chart):
+class LineChart(Chart):
 
     def __add__(self, other):
         """
