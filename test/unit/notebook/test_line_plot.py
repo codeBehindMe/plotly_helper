@@ -52,7 +52,7 @@ class TestLinePlot:
 
         plt = LinePlot(data['x'], data['y']).colour("maroon")()
 
-        plot(plt)  # FIXME: Complete this test.
+        plt  # FIXME: Complete this test.
 
     def test_lines_style_definition(self, data):
         """
@@ -69,7 +69,7 @@ class TestLinePlot:
         :param data:
         :return:
         """
-        plot(LinePlot(data['x'], data['y']).title(None)())
+        LinePlot(data['x'], data['y']).title(None)()
 
     def test_add_plots(self, data):
         """
@@ -77,9 +77,10 @@ class TestLinePlot:
         :param data:
         :return:
         """
-        p1 = LinePlot(data['x'], data['y']).line_style('dot')
+        p1 = LinePlot(data['x'], data['y']).line_style('dot').title('first').name('first')
         p2 = LinePlot(data['x'],
-                      data['y'] + np.random.randint(0, 3)).line_style('dot')
+                      data['y'] + np.random.randint(1, 3)).line_style(
+            'dot').title('other').name('second')
 
-        p3 = (p1 + p2).title("Combined plot.")
+        p3 = (p1 + p2).title("third")
         plot(p3())

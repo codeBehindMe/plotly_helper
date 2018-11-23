@@ -132,12 +132,16 @@ class LinePlot(Chart):
         Return the scatter object without changing object state.
         :return:
         """
-        return go.Scatter(x=self.x, y=self.y, name=self.name, line=self.line)
+        return go.Scatter(x=self.x, y=self.y, name=self.line_name,
+                          line=self.line)
 
     def _compile_scatter_object(self):
         """
         Compiles a plotly scatter object and assigns it to the data list.
         :return:
         """
-        self.data.append(go.Scatter(x=self.x, y=self.y, name=self.line_name,
+        # Insert to front if there is already a scatter object from an add
+        # operation. Since our scatter
+        self.data.insert(0,
+                         go.Scatter(x=self.x, y=self.y, name=self.line_name,
                                     line=self.line))
