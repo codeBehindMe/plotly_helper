@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 import plotly.graph_objs as go
 
 from abstraction.constants import COLOUR_RGB_MAP
@@ -12,10 +14,21 @@ class LinePlot(Chart):
         """
         Adds another plot to this chart. This isn't multiplot , this is just
         adding two lines or overlaying plots together.
+
+        Currently this only supports other line charts.
         :param other: Other chart.
         :return:
         """
-        raise NotImplementedError()
+
+        # Make a new plot with this object as a copy.
+        new_plot = deepcopy(self)
+        # Append the other scatter object to the new plot.
+        new_plot.data.append(other.get_scatter_object())
+
+        # Combine layouts
+        new_plot.layout = {**other.layout, **self.layout}
+
+        return new_plot
 
     def __call__(self, *args, **kwargs):
         self._compile_scatter_object()
@@ -110,6 +123,13 @@ class LinePlot(Chart):
         :return:
         """
         return Yaxis(self)
+
+    def get_scatter_object(self):
+        """
+        Return the scatter object without changing object state.
+        :return:
+        """
+        return go.Scatter(x=self.x, y=self.y, name=self.name, line=self.line)
 
     def _compile_scatter_object(self):
         """

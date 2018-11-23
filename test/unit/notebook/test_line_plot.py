@@ -69,5 +69,17 @@ class TestLinePlot:
         :param data:
         :return:
         """
-
         plot(LinePlot(data['x'], data['y']).title(None)())
+
+    def test_add_plots(self, data):
+        """
+        Tests that the add operator works correctly.
+        :param data:
+        :return:
+        """
+        p1 = LinePlot(data['x'], data['y']).line_style('dot')
+        p2 = LinePlot(data['x'],
+                      data['y'] + np.random.randint(0, 3)).line_style('dot')
+
+        p3 = (p1 + p2).title("Combined plot.")
+        plot(p3())
