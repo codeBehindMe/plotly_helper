@@ -79,6 +79,9 @@ class LinePlot(Chart):
         :param value: Colour
         :return:
         """
+        if value is None:
+            self.line['color'] = None
+            return self
         try:
             self.line['color'] = COLOUR_RGB_MAP[value.lower()]
             return self
