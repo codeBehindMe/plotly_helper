@@ -10,6 +10,7 @@ from abstraction.meta import Yaxis
 
 
 class LinePlot(Chart):
+
     def __add__(self, other):
         """
         Adds another plot to this chart. This isn't multiplot , this is just
@@ -127,7 +128,7 @@ class LinePlot(Chart):
         """
         return Yaxis(self)
 
-    def get_scatter_object(self):
+    def get_plotly_object(self):
         """
         Return the scatter object without changing object state.
         :return:
