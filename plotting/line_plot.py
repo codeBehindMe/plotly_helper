@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 import plotly.graph_objs as go
 
 from abstraction.constants import COLOUR_RGB_MAP
@@ -9,7 +11,24 @@ from abstraction.meta import Yaxis
 
 class LinePlot(Chart):
     def __add__(self, other):
-        pass
+        """
+        Adds another plot to this chart. This isn't multiplot , this is just
+        adding two lines or overlaying plots together.
+
+        Currently this only supports other line charts.
+        :param other: Other chart.
+        :return:
+        """
+
+        # Make a new plot with this object as a copy.
+        new_plot = deepcopy(self)
+        # Append the other scatter object to the new plot.
+        new_plot.data.append(other.get_scatter_object())
+
+        # Combine layouts
+        new_plot.layout = {**other.layout, **self.layout}
+
+        return new_plot
 
     def __call__(self, *args, **kwargs):
         self._compile_scatter_object()
@@ -60,6 +79,9 @@ class LinePlot(Chart):
         :param value: Colour
         :return:
         """
+        if value is None:
+            self.line['color'] = None
+            return self
         try:
             self.line['color'] = COLOUR_RGB_MAP[value.lower()]
             return self
@@ -105,10 +127,21 @@ class LinePlot(Chart):
         """
         return Yaxis(self)
 
+    def get_scatter_object(self):
+        """
+        Return the scatter object without changing object state.
+        :return:
+        """
+        return go.Scatter(x=self.x, y=self.y, name=self.line_name,
+                          line=self.line)
+
     def _compile_scatter_object(self):
         """
         Compiles a plotly scatter object and assigns it to the data list.
         :return:
         """
-        self.data.append(go.Scatter(x=self.x, y=self.y, name=self.line_name,
+        # Insert to front if there is already a scatter object from an add
+        # operation. Since our scatter
+        self.data.insert(0,
+                         go.Scatter(x=self.x, y=self.y, name=self.line_name,
                                     line=self.line))
