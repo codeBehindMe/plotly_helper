@@ -25,6 +25,15 @@ class Chart(metaclass=ABCMeta):
         """
         pass
 
+    @abstractmethod
+    def _prepare_plot_package(self):
+        """
+        Prepares the class for the plot / iplot call from plotly.
+        :return:
+        """
+        pass
+
+
 
 class XAxis:
     def __init__(self, caller):
