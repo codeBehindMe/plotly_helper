@@ -1,7 +1,7 @@
 import pytest
-from plotly.offline import plot
 
 from plotting.bar_chart import BarChart
+from plotly.offline import plot
 
 """
 Unit test for the BarPlot class
@@ -30,16 +30,24 @@ class TestBarPlot:
         :return:
         """
 
-        chart = BarChart(data['x'], data['y'])()
-        # plot(chart)
+        BarChart(data['x'], data['y'])()
 
-    def test_line_colour(self,data):
+    def test_line_colour(self, data):
         """
         Checks that the line color setting works correctly.
         :param data:
         :return:
         """
-        chart = BarChart(data['x'], data['y']).line_colour('black').line_width(1.5)
+        chart = BarChart(data['x'], data['y']).line_colour(
+            'black').line_width(1.5).title('other')
         chart = chart.fill_opacity(0.7).fill_colour('green')()
 
+    def test_axis_titles(self, data):
+        """
+        Checks axis titles
+        :param data:
+        :return:
+        """
+
+        chart = BarChart(data['x'], data['y']).xaxis.title('TITLE')()
         plot(chart)

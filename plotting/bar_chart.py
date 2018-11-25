@@ -2,15 +2,25 @@ import plotly.graph_objs as go
 
 from abstraction.constants import COLOUR_RGB_MAP
 from abstraction.meta import Chart
+from abstraction.meta import YAxis
+from abstraction.meta import XAxis
 
 
 class BarChart(Chart):
+    @property
+    def xaxis(self):
+        return XAxis(self)
+
+    @property
+    def yaxis(self):
+        return YAxis(self)
+
     def __add__(self, other):
         pass
 
     def __call__(self, *args, **kwargs):
         self._prepare_plot_package()
-        return dict(data=self.data, layout=self.layout)
+        return dict(data=self.data, layout=go.Layout(**self.layout))
 
     def get_plotly_object(self):
         return go.Bar(x=self.x, y=self.y, name=self.bar_name,
@@ -27,12 +37,10 @@ class BarChart(Chart):
         :param text: Text for each of the bars for hover.
         :param kwargs:  Other optionals
         """
+        super().__init__()
         self.x = x
         self.y = y
         self.text = text
-        self.data = []
-
-        self.layout = {}
         self.marker = {'line': {}}
 
         self.bar_name = None
@@ -49,15 +57,6 @@ class BarChart(Chart):
         """
 
         self.bar_name = value
-        return self
-
-    def title(self, value):
-        """
-        Title of the chart.
-        :param value:
-        :return:
-        """
-        self.layout['title'] = value
         return self
 
     def fill_colour(self, value):
