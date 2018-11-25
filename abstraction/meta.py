@@ -7,6 +7,10 @@ from abc import ABCMeta, abstractmethod
 
 class Chart(metaclass=ABCMeta):
 
+    def __init__(self):
+        self.layout = {'xaxis': {}, 'yaxis': {}}
+        self.data = []
+
     @abstractmethod
     def __add__(self, other):
         pass
@@ -33,6 +37,24 @@ class Chart(metaclass=ABCMeta):
         """
         pass
 
+    @property
+    @abstractmethod
+    def xaxis(self):
+        pass
+
+    @property
+    @abstractmethod
+    def yaxis(self):
+        pass
+
+    def title(self, value):
+        """
+        Set's the chart title.
+        :param value:
+        :return:
+        """
+        self.layout['title'] = value
+        return self
 
 
 class XAxis:
@@ -40,14 +62,22 @@ class XAxis:
         self.caller = caller
 
     def title(self, value):
-        self.caller.layout['xaxis'] = value
+        self.caller.layout['xaxis']['title'] = value
+        return self.caller
+
+    def tickangle(self, value):
+        self.caller.layout['xaxis']['tickangle'] = value
         return self.caller
 
 
-class Yaxis:
+class YAxis:
     def __init__(self, caller):
         self.caller = caller
 
     def title(self, value):
-        self.caller.layout['yaxis'] = value
+        self.caller.layout['yaxis']['title'] = value
+        return self.caller
+
+    def tickangle(self, value):
+        self.caller.layout['yaxis']['tickangle'] = value
         return self.caller

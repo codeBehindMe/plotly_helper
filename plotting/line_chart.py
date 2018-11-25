@@ -6,7 +6,7 @@ from abstraction.constants import COLOUR_RGB_MAP
 from abstraction.constants import LINE_STYLE_MAP
 from abstraction.meta import Chart
 from abstraction.meta import XAxis
-from abstraction.meta import Yaxis
+from abstraction.meta import YAxis
 
 
 class LineChart(Chart):
@@ -33,7 +33,7 @@ class LineChart(Chart):
 
     def __call__(self, *args, **kwargs):
         self._prepare_plot_package()
-        return dict(data=self.data, layout=self.layout)
+        return dict(data=self.data, layout=go.Layout(**self.layout))
 
     def __init__(self, x, y, **kwargs):
         """
@@ -44,10 +44,9 @@ class LineChart(Chart):
         :param y: Y coordinates of line.
         :param kwargs: Additional arguments for formatting the line.
         """
+        super().__init__()
         self.x = x
         self.y = y
-        self.layout = {}
-        self.data = []
         self.line = {}
         self.line_name = None
 
@@ -126,7 +125,7 @@ class LineChart(Chart):
         Defining the y-axis parameters.
         :return:
         """
-        return Yaxis(self)
+        return YAxis(self)
 
     def get_plotly_object(self):
         """
