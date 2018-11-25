@@ -15,6 +15,25 @@ class Chart(metaclass=ABCMeta):
     def __call__(self, *args, **kwargs):
         pass
 
+    @abstractmethod
+    def get_plotly_object(self):
+        """
+        Returns the plotly object for the class.
+
+        Example: Scatter(x,y...)
+        :return:
+        """
+        pass
+
+    @abstractmethod
+    def _prepare_plot_package(self):
+        """
+        Prepares the class for the plot / iplot call from plotly.
+        :return:
+        """
+        pass
+
+
 
 class XAxis:
     def __init__(self, caller):

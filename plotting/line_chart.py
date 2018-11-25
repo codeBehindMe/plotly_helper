@@ -9,7 +9,8 @@ from abstraction.meta import XAxis
 from abstraction.meta import Yaxis
 
 
-class LinePlot(Chart):
+class LineChart(Chart):
+
     def __add__(self, other):
         """
         Adds another plot to this chart. This isn't multiplot , this is just
@@ -23,7 +24,7 @@ class LinePlot(Chart):
         # Make a new plot with this object as a copy.
         new_plot = deepcopy(self)
         # Append the other scatter object to the new plot.
-        new_plot.data.append(other.get_scatter_object())
+        new_plot.data.append(other.get_plotly_object())
 
         # Combine layouts
         new_plot.layout = {**other.layout, **self.layout}
@@ -31,7 +32,7 @@ class LinePlot(Chart):
         return new_plot
 
     def __call__(self, *args, **kwargs):
-        self._compile_scatter_object()
+        self._prepare_plot_package()
         return dict(data=self.data, layout=self.layout)
 
     def __init__(self, x, y, **kwargs):
@@ -127,7 +128,7 @@ class LinePlot(Chart):
         """
         return Yaxis(self)
 
-    def get_scatter_object(self):
+    def get_plotly_object(self):
         """
         Return the scatter object without changing object state.
         :return:
@@ -135,13 +136,11 @@ class LinePlot(Chart):
         return go.Scatter(x=self.x, y=self.y, name=self.line_name,
                           line=self.line)
 
-    def _compile_scatter_object(self):
+    def _prepare_plot_package(self):
         """
         Compiles a plotly scatter object and assigns it to the data list.
         :return:
         """
         # Insert to front if there is already a scatter object from an add
         # operation. Since our scatter
-        self.data.insert(0,
-                         go.Scatter(x=self.x, y=self.y, name=self.line_name,
-                                    line=self.line))
+        self.data.insert(0, self.get_plotly_object())
