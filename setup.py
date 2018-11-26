@@ -6,4 +6,4 @@ setup(name='plotly_helper', version='0.01',
       url='https://github.com/codeBehindMe/plotly_helper',
       license='Apache 2.0', author='Machine  Sciences Lab',
       author_email='aaron.tillekeratne@gmail.com',
-      description='Quick helper for plotly.', package_dir={'': 'lib'})
+      description='Quick helper for plotly.')
