@@ -1,9 +1,9 @@
 import plotly.graph_objs as go
 
-from abstraction.constants import COLOUR_RGB_MAP
-from abstraction.meta import Chart
-from abstraction.meta import YAxis
-from abstraction.meta import XAxis
+from plotly_helper.abstraction import COLOUR_RGB_MAP
+from plotly_helper.abstraction import Chart
+from plotly_helper.abstraction import YAxis
+from plotly_helper.abstraction import XAxis
 
 
 class BarChart(Chart):

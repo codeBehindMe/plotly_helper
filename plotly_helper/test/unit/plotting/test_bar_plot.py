@@ -1,6 +1,6 @@
 import pytest
 
-from plotting.bar_chart import BarChart
+from plotly_helper.plotting import BarChart
 from plotly.offline import plot
 
 """
