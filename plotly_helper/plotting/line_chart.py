@@ -2,11 +2,12 @@ from copy import deepcopy
 
 import plotly.graph_objs as go
 
-from plotly_helper.abstraction import COLOUR_RGB_MAP
-from plotly_helper.abstraction import LINE_STYLE_MAP
-from plotly_helper.abstraction import Chart
-from plotly_helper.abstraction import XAxis
-from plotly_helper.abstraction import YAxis
+
+from plotly_helper.abstraction.constants import COLOUR_RGB_MAP
+from plotly_helper.abstraction.constants import LINE_STYLE_MAP
+from plotly_helper.abstraction.meta import Chart
+from plotly_helper.abstraction.meta import XAxis
+from plotly_helper.abstraction.meta import YAxis
 
 
 class LineChart(Chart):

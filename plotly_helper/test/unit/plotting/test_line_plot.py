@@ -3,7 +3,7 @@ import pytest
 from plotly.graph_objs import Scatter
 from plotly.offline import plot
 
-from plotly_helper.plotting import LineChart
+from plotly_helper.plotting.line_chart import LineChart
 
 """
 Unit tests for the Lineplot class

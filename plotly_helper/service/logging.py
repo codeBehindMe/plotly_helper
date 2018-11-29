@@ -1,7 +1,7 @@
 import logging
 
-from plotly_helper.abstraction import DEFAULT_LOG_LEVEL
-from plotly_helper.abstraction import LIBRARY_NAME
+from plotly_helper.abstraction.constants import DEFAULT_LOG_LEVEL
+from plotly_helper.abstraction.constants import LIBRARY_NAME
 
 """
 Logging setup for plotly helper. 
